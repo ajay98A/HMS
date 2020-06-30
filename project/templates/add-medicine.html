@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h3 align="center"> Add Medicine to Database</h3>
+<form method="post">
+
+  {{form.hidden_tag()}}
+  <div class="form-group">
+  {{form.mid.label}} {{form.mid(class="form-control")}}
+  </div>
+  <div class="form-group">
+  {{form.mname.label}} {{form.mname(class="form-control")}}
+  </div>
+  <div class="form-group">
+  {{form.qavailable.label}} {{form.qavailable(class="form-control")}}
+  </div>
+  <div class="form-group">
+  {{form.rate.label}} {{form.rate(class="form-control")}}
+  </div>
+  {{form.submit(class="btn btn-primary")}}
+
+</form>
+</div>
+{% endblock %}

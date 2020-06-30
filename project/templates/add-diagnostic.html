@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <h3 align="center"> Add Diagnostic Test to Database</h3>
+<form method="post">
+
+  {{form.hidden_tag()}}
+  <div class="form-group">
+  {{form.tid.label}} {{form.tid(class="form-control")}}
+  </div>
+  <div class="form-group">
+  {{form.tname.label}} {{form.tname(class="form-control")}}
+  </div>
+  <div class="form-group">
+  {{form.rate.label}} {{form.rate(class="form-control")}}
+  </div>
+  {{form.submit(class="btn btn-primary")}}
+
+</form>
+</div>
+{% endblock %}

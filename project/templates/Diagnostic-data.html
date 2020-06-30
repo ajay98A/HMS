@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>Service Name</th>
+    <th>Price</th>
+  </tr>
+  {% for item in data %}
+  <tr>
+    <td>{{item.tid}}</td>
+    <td>{{item.tname}}</td>
+    <td>{{item.tcharge}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
+
+{% endblock %}

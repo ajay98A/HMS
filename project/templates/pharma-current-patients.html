@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>SSN id</th>
+    <th>name</th>
+    <th>age</th>
+    <th>address</th>
+    <th>city</th>
+    <th>state</th>
+    <th></th>
+  </tr>
+  {% for item in data %}
+  <tr>
+    <td>{{item.id}}</td>
+    <td>{{item.ssn_id}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.age}}</td>
+    <td>{{item.address}}</td>
+    <td>{{item.city}}</td>
+    <td>{{item.state}}</td>
+    <td><a href="{{url_for('IssueMedicine',pid=item.id)}}">Issue Medicine</a></td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
+
+{% endblock %}

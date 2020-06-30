@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <h3 align="center"> Search Patient using Patient id </h3>
+<form method="post">
+  {{form.hidden_tag()}}
+  <div class="form-group">
+  {{form.pid.label}} {{form.pid(class="form-control")}}
+  </div>
+  <div class="form-group">
+  {{form.name.label()}} {{form.name(class="form-control")}}
+  </div>
+  <div class="form-group">
+  {{form.age.label()}} {{form.age(class="form-control")}}
+  </div>
+  {{form.submit(class="btn btn-primary")}}
+
+</form>
+</div>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>SSN id</th>
+    <th>name</th>
+    <th>age</th>
+    <th>address</th>
+    <th>city</th>
+    <th>state</th>
+  </tr>
+  <tr>
+    <td>{{id}}</td>
+    <td>{{ssn_id}}</td>
+    <td>{{name}}</td>
+    <td>{{age}}</td>
+    <td>{{address}}</td>
+    <td>{{city}}</td>
+    <td>{{state}}</td>
+
+  </tr>
+
+</table>
+
+</body>
+</html>
+{% endblock %}

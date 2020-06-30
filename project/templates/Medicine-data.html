@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+  {% for item in data %}
+  <tr>
+    <td>{{item.mid}}</td>
+    <td>{{item.mname}}</td>
+    <td>{{item.qavailable}}</td>
+    <td>{{item.rate}}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
+
+{% endblock %}

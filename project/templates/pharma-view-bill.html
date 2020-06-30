@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="col-md-4 col-lg-offset-4">
+    <form method="post">
+      {{form.hidden_tag()}}
+      <div class="form-group">
+      {{form.pid.label}} {{form.pid(class="form-control")}}
+      </div>
+      {{form.submit(class="btn btn-primary")}}
+    </form>
+  </div>
+</div>
+
+
+
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  <h3 align="center">Patient details</h3>
+  <tr>
+    <th>id</th>
+    <th>SSN id</th>
+    <th>name</th>
+    <th>age</th>
+    <th>address</th>
+    <th>city</th>
+    <th>state</th>
+  </tr>
+
+  <tr>
+    {% for i in patient_details %}
+    <td>{{i}}</td>
+    {% endfor %}
+  </tr>
+
+
+</table>
+<table>
+  <h3 align="center">Medicines Issued Till Now</h3>
+  {% if med %}
+  <tr>
+   <th> ID </th>
+   <th> NAME OF MEDICINE </th>
+   <th> RATE </th>
+   <th> QUANTITY</th>
+   <th> AMOUNT</th>
+  </tr>
+  {% for med in med %}
+<tr>
+    <td> {{ med.mid }} </td>
+    <td> {{ med.mname }} </td>
+    <td> {{ med.rate }}.00 </td>
+    <td>{{ med.qissued }}</td>
+    <td>{{ med.qissued * med.rate }}</td>
+</tr>
+{% endfor %}
+{% endif %}
+</table>
+<table>
+  <h3 align="center">Pharmacy Bill</h3>
+<tr>
+    <td> Bill for Pharmacy </td>
+    <td> {{price}} </td>
+
+</tr>
+
+</table>
+</body>
+</html>
+{% endblock %}

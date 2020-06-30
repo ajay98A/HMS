@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <h3 align="center"> View Diagnostic bill of a patient</h3>
+<form method="post">
+  {{form.hidden_tag()}}
+  <div class="form-group">
+  {{form.pid.label}} {{form.pid(class="form-control")}}
+  </div>
+  {{form.submit(class="btn btn-primary")}}
+</form>
+</div>
+
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  {% if item%}
+  <h4 align="center">Patient details</h4>
+  <tr>
+    <th>id</th>
+    <th>SSN id</th>
+    <th>name</th>
+    <th>age</th>
+    <th>address</th>
+    <th>city</th>
+    <th>state</th>
+  </tr>
+ {% endif %}
+  <tr>
+    {% for i in patient_details %}
+    <td>{{i}}</td>
+    {% endfor %}
+  </tr>
+
+</table>
+<table>
+  {% if med %}
+  <h4 align="center">Diagnostic Issued Till Now</h4>
+  <tr>
+   <th> ID </th>
+   <th> NAME OF TEST </th>
+   <th> RATE </th>
+  </tr>
+  {% for med in med %}
+<tr>
+    <td> {{ med.tid }} </td>
+    <td> {{ med.tname }} </td>
+    <td> {{ med.charge }}.00 </td>
+</tr>
+{% endfor %}
+{% endif %}
+</table>
+{% if med %}
+<table>
+  <h4 align="center">Diagnostic Bill</h4>
+<tr>
+    <td> Bill for Diagnostics </td>
+    <td> {{price}} </td>
+
+</tr>
+{% endif %}
+</table>
+</body>
+</html>
+{% endblock %}

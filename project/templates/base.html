@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <title></title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="nav">
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('home')}}">Home</a></li>
+      {% if current_user.is_authenticated %}
+
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('logout')}}">Logout</a></li>
+
+      {% if current_user.urole == "staff" %}
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('addpatient')}}">Add Patient</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('viewpatient')}}">View Patients</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('searchpatient')}}">Search Patients</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('deletepatient')}}">Delete Patients</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('UpdatePatient')}}">Update Patients</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('Pbilling')}}">Patient Bill Generate</a></li>
+
+
+      {% elif current_user.urole == "pharma" %}
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('ViewDetails')}}">Search Patients</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('Pharmaviewpatient')}}">View Patients</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('AddMedicine')}}">Add medicines</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('ViewMedicine')}}">View Medicine</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('PharmaBill')}}">Get Pharmacy Bill</a></li>
+
+      {% elif current_user.urole == "diag" %}
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('AddDiag')}}">Add A Diagnostic Service</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('ViewDiagnostics')}}">View Diagnostic Services</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('Diagviewpatient')}}">View Patients</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('ViewDetailsDiag')}}">Get patient Details</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('diagbill')}}">Get Diagnostic Bill</a></li>
+
+
+
+
+      {% endif %}
+
+      {% else %}
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('login')}}">Login</a></li>
+      <li class="nav-link" > <a class="nav-link" href="{{url_for('register')}}">Register</a></li>
+
+      {% endif %}
+
+    </ul>
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+      </div>
+      {% endfor %}
+
+</nav>
+    {% block content %}
+
+    {% endblock %}
+
+  </body>
+</html>

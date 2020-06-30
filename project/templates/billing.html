@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h3 align="center"> Generate bill using Patient id</h3>
+<form method="post">
+  {{form.hidden_tag()}}
+  <div class="form-group">
+  {{form.id.label}} {{form.id(class="form-control")}}
+  </div>
+  {{form.submit(class="btn btn-primary")}}
+</form>
+</div>
+    {% if patient %}
+    <h3 align="center" >Patient Billing</h3>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>SSN ID</th>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>ROOM TYPE</th>
+            <th>ADDRESS</th>
+            <th>STATUS</th>
+            <th>ADMIT DATE</th>
+            <th>No. OF DAYS</th>
+            <th>ROOM BILL </th>
+
+        </tr>
+
+        <tr>
+            <td> {{ patient.id }} </td>
+            <td> {{ patient.ssn_id }} </td>
+            <td> {{ patient.name }} </td>
+            <td> {{ patient.age }} </td>
+            <td> {{ patient.bed_type }} </td>
+            <td> {{ patient.address }}</td>
+            <td> {{ patient.status }} </td>
+            <td> {{ y }} </td>
+            <td> {{delta}} </td>
+            <td> {{ bill }} </td>
+
+        </tr>
+        </table>
+  <table>
+    <h3 align="center">Pharmacy Charges</h3>
+      {% if med1 %}
+      <tr>
+       <th> ID </th>
+       <th> NAME OF MEDICINE </th>
+       <th> RATE </th>
+       <th> QUANTITY</th>
+       <th> AMOUNT</th>
+      </tr>
+      {% for med in med1 %}
+    <tr>
+        <td> {{ med.mid }} </td>
+        <td> {{ med.mname }} </td>
+        <td> {{ med.rate }}.00 </td>
+        <td>{{ med.qissued }}</td>
+        <td>{{ med.qissued * med.rate }}</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    {% set price = 0 %}
+    {% endif %}
+
+    <tr>
+      <th> Bill for Pharmacy </th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th> {{price}} </th>
+    </tr>
+    </table>
+
+
+  <table>
+    <h3 align="center">Diagnostic Charges</h3>
+    {% if med2 %}
+    <tr>
+     <th> ID </th>
+     <th> NAME OF TEST </th>
+     <th> RATE </th>
+    </tr>
+    {% for med in med2 %}
+  <tr>
+      <td> {{ med.tid }} </td>
+      <td> {{ med.tname }} </td>
+      <td> {{ med.charge }}.00 </td>
+  </tr>
+
+  {% endfor %}
+
+  {% else %}
+  {% set price2 = 0 %}
+
+  {% endif %}
+
+
+  <tr>
+    <th> Bill for Diagnostics </th>
+    <th></th>
+    <th> {{price2}} </th>
+  </tr>
+
+
+  </table>
+  <table>
+    <h3 align="center">Final Bill</h3>
+      <tr>
+       <th> Name of Bill </th>
+       <th> Amount </th>
+       </tr>
+     <tr>
+        <td>Room Bill</td>
+        <td>{{bill}}</td>
+    </tr>
+    <tr>
+      <td>Pharmacy Bill</td>
+      <td>{{price}}</td>
+    </tr>
+    <tr>
+      <td>Diagnostic Test Bill</td>
+      <td>{{price2}}</td>
+    </tr>
+    <tr>
+     <th> Grand Total </th>
+     <th> {{bill+price+price2}} </th>
+    </tr>
+    </table>
+{% endif %}
+
+
+
+{% endblock %}

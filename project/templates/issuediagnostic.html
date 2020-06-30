@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <h3 align="center"> Issues Diagnostic Test to a patient</h3>
+<form method="post">
+
+  {{form.hidden_tag()}}
+  <div class="form-group">
+  {{form.name.label}} {{form.name(class="form-control")}}
+  </div>
+  {{form.submit(class="btn btn-primary")}}
+
+</form>
+</div>
+{% if patient_details %}
+<h1>Patient details</h1>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+
+    </tr>
+
+    <tr>
+        <td> {{ patient_details.name }} </td>
+        <td> {{ patient_details.age }} </td>
+        <td> {{ patient_details.address }} </td>
+        <td> {{ patient_details.city }} </td>
+        <td> {{ patient_details.state }} </td>
+    </tr>
+</table>
+{% endif %}
+{% if patient %}
+<h1>Diagnostic Details</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>RATE</th>
+
+    </tr>
+
+    <tr>
+        <td> {{ patient.tid }} </td>
+        <td> {{ patient.tname }} </td>
+        <td> {{ patient.tcharge }} </td>
+    </tr>
+</table>
+{% endif %}
+{% endblock %}
