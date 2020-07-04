@@ -76,6 +76,25 @@ def register():
 def addpatient():
     form = AddPatient()
     if form.validate_on_submit():
+        if Patient.query.filter_by(ssn_id=form.ssn_id.data).first():
+            flash("SSN Id Exists")
+            return redirect(url_for('addpatient'))
+        ssn_id_check = form.ssn_id.data
+        if len(str(ssn_id_check)) < 9:
+            flash("SSN Id must be 9 digits")
+            return redirect(url_for('addpatient'))
+        s = form.name.data
+        if not all(x.isalpha() or x.isspace() for x in s):
+            flash("Only alphabets are allowed in name, Enter details again")
+            return redirect(url_for('addpatient'))
+        s = form.Address.data
+        if not all(x.isalnum() or x.isspace() for x in s):
+            flash("Only Alphanumeric characters allowed in Address, no special characters")
+            return redirect(url_for('addpatient'))
+        age_check =form.age.data
+        if len(str(age_check)) < 2 or len(str(age_check)) > 3:
+            flash("Enter Age in 2 digits and no more than 3 digits")
+            return redirect(url_for('addpatient'))
         patient_add = Patient(ssn_id=form.ssn_id.data,
                               name=form.name.data,
                               age=form.age.data,
@@ -88,6 +107,7 @@ def addpatient():
         db.session.add(patient_add)
         db.session.commit()
         flash('Patient Added')
+        return redirect(url_for('viewpatient'))
     return render_template('add-patient.html',form=form)
 
 @app.route('/view-patient',methods=['GET'])
@@ -129,13 +149,24 @@ def deletepatient():
         id = form.pid.data
         item = Patient.query.get(id)
         if item:
-            db.session.delete(item)
-            db.session.commit()
-            flash('Patient Record Deleted')
-            return render_template('view-patient.html')
+            return render_template('delete-patient.html',form=form,item=item)
         else:
             flash("Patient Not Found")
     return render_template("delete-patient.html",form=form)
+@app.route('/delete-patient2/<pid>',methods=['GET','POST'])
+@login_required
+@permission_required("staff")
+def deletepatient2(pid):
+    pat_det = Patient.query.get(pid)
+    if pat_det:
+        db.session.delete(pat_det)
+        db.session.commit()
+        flash('Record is deleted')
+        return redirect(url_for('viewpatient'))
+    if pat_det == None:
+        flash('Patient Record Not Found, Please try again')
+        return redirect(url_for('deletepatient'))
+
 @app.route('/update-patient',methods=['GET','POST'])
 @login_required
 @permission_required("staff")
@@ -144,6 +175,10 @@ def UpdatePatient():
     if form.validate_on_submit():
         id = form.pid.data
         item = Patient.query.get(id)
+        s = form.Address.data
+        if not all(x.isalnum() or x.isspace() for x in s):
+            flash("Only Alphanumeric characters allowed in Address, no special characters")
+            return redirect(url_for('UpdatePatient'))
         if item:
             if form.name.data != "" :
                 item.name = form.name.data
@@ -155,6 +190,8 @@ def UpdatePatient():
                 item.city = form.city.data
             if form.state.data != "" :
                 item.state = form.state.data
+            item.bed_type = form.bed_type.data
+            item.status = form.status.data
             db.session.commit()
             flash('Patient Details Updated')
             return redirect(url_for('viewpatient'))
@@ -183,7 +220,7 @@ def Pbilling():
 
             if patient == None:
                 flash('No Patients with that this ID exists')
-                return redirect( url_for('billing') )
+                return redirect( url_for('Pbilling') )
             elif patient.status != 'Active':
                 flash('No Active Patients')
 

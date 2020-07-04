@@ -19,5 +19,52 @@
 
 </form>
 </div>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<table>
+  {% if item %}
+  <h4 align="center">Patient details(For Deletion Confirmation)</h4>
+  <tr>
+    <th>id</th>
+    <th>SSN id</th>
+    <th>name</th>
+    <th>age</th>
+    <th>address</th>
+    <th>city</th>
+    <th>state</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>{{item.id}}</td>
+    <td>{{item.ssn_id}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.age}}</td>
+    <td>{{item.address}}</td>
+    <td>{{item.city}}</td>
+    <td>{{item.state}}</td>
+    <td><a href="{{url_for('deletepatient2',pid=item.id)}}">Delete Patient</a></td>
+  </tr>
+{% endif %}
+</table>
 
 {% endblock %}

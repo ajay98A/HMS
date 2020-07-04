@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from sqlalchemy import ForeignKey
 from datetime import datetime
+from sqlalchemy.schema import Sequence
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -26,7 +27,7 @@ class User(db.Model,UserMixin):
 
 class Patient(db.Model):
     __tablename__ = 'patient'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer,primary_key=True)
     ssn_id = db.Column(db.String(45), nullable=False, unique=True)
     name = db.Column(db.String(45), nullable=False)
     age = db.Column(db.Integer, nullable=False)

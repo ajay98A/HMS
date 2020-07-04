@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField,IntegerField,SelectField,TextField,DateField,FloatField
+from wtforms import StringField,PasswordField,SubmitField,IntegerField,SelectField,TextField,DateField,FloatField,TextAreaField
 from wtforms.validators import DataRequired,Email,EqualTo,Optional
 from wtforms import ValidationError
 from project.models import User,Patient
@@ -23,7 +23,7 @@ class AddPatient(FlaskForm):
     ssn_id = IntegerField('ssn id',validators=[DataRequired()])
     name = StringField('Patient Name',validators=[DataRequired()])
     age = StringField('Age',validators=[DataRequired()])
-    Address = TextField('Address',validators=[DataRequired()])
+    Address = TextAreaField('Address',validators=[DataRequired()])
     bed_type = SelectField('Bed Types', choices=[('General ward', 'General ward'), ('semi sharing', 'semi sharing'),('single room','single room') ])
     date = DateField('Date(yyyy-mm-dd)',validators=[DataRequired()])
     city = StringField('City',validators=[DataRequired()])
@@ -31,9 +31,7 @@ class AddPatient(FlaskForm):
     status = SelectField('Status', choices=[('Active','Active'), ('Discharged','Discharged') ])
     submit = SubmitField('Add Patient')
 
-    def check_patient(self,field):
-        if Patient.query.filter_by(ssn_id=field.data).first():
-            raise ValidationError('Patient exists!')
+
 class SearchForm(FlaskForm):
     pid = IntegerField('Patient Id',validators=[DataRequired()])
     name = StringField('Patient Name',validators=[Optional()])
@@ -44,15 +42,17 @@ class DeletePatient(FlaskForm):
     pid = IntegerField('Patient Id',validators=[DataRequired()])
     name = StringField('Patient Name',validators=[Optional()])
     age = IntegerField('Age',validators=[Optional()])
-    submit = SubmitField('Search',validators=[Optional()])
+    submit = SubmitField('Get',validators=[Optional()])
 
 class UpdateForm(FlaskForm):
     pid = IntegerField('Patient Id',validators=[DataRequired()])
     name = StringField('Patient Name',validators=[Optional()])
     age = StringField('Age',validators=[Optional()])
-    Address = TextField('Address',validators=[Optional()])
+    Address = TextAreaField('Address',validators=[Optional()])
+    bed_type = SelectField('Bed Types', choices=[('General ward', 'General ward'), ('semi sharing', 'semi sharing'),('single room','single room') ])
     city = StringField('City',validators=[Optional()])
     state = StringField('State',validators=[Optional()])
+    status = SelectField('Status', choices=[('Active','Active'), ('Discharged','Discharged') ])
     submit = SubmitField('Update Patient')
 
 class MedicineForm(FlaskForm):
