@@ -1,4 +1,4 @@
-# HMS
+# Hospital Management System
 Hospital Management System Where Registration Desk Executive/Pharmacy/Diagnostic Executive can perform their respective operations.
 
 ## Registration Desk Executive :
