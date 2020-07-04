@@ -7,17 +7,17 @@ Can Add, Delete or Updte Patient Record
 Can Generate Entire Bill for the Sevices Taken by Patient like (Pharmacy, Diagnostic Test, Room Bill (Edit Room Bill price in views.py file and room type in forms.py file)
 
 
-#Pharmacy :
+## Pharmacy :
 can Add Medicine
 Can Issue Medicines for Active Patients
 Can generate Pharmacy Bill
 
-#Diagnostic Executive:
+## Diagnostic Executive:
 Can Add Diagnotic tests
 Can Issue Diagnostic Test to Patients
 Can generate Diagnostic test bill
 
-#Usage:
+## Usage:
 Install requirements. text by running
 ```pip install -r requirements.txt```
 
