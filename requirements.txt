@@ -15,7 +15,7 @@ backports.tempfile==1.0
 backports.weakref==1.0.post1
 bcrypt==3.1.7
 bkcharts==0.2
-bleach==3.1.0
+bleach==3.1.4
 blinker==1.4
 bokeh==1.4.0
 boto==2.49.0
