@@ -1,7 +1,7 @@
 # HMS
 Hospital Management System Where Registration Desk Executive/Pharmacy/Diagnostic Executive can perform their respective operations.
 
-#Registration Desk Executive :
+## Registration Desk Executive :
 
 Can Add, Delete or Updte Patient Record
 Can Generate Entire Bill for the Sevices Taken by Patient like (Pharmacy, Diagnostic Test, Room Bill (Edit Room Bill price in views.py file and room type in forms.py file)
