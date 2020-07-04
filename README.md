@@ -19,21 +19,23 @@ Can generate Diagnostic test bill
 
 #Usage:
 Install requirements. text by running
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 
 Run powershell or Command prompt as administrator and run :
-
+```
 flask db init
-
+```
+```
 flask db migrate
-
+```
+```
 flask db upgrade
-
+```
 Above lines are important for code to run
 
 Now run python app.py (Note that debug is set to True)
 
-Go to 127.0.0.1:5000 (Unless you specified a default Port number)
+Go to ```127.0.0.1:5000``` (Unless you specified a default Port number)
 
 Register new User
 
