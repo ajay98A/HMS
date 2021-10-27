@@ -26,7 +26,7 @@ Click==7.0
 contextlib2==0.6.0.post1
 Cython==0.29.15
 cytoolz==0.10.1
-dask==2.11.0
+dask==2021.10.0
 decorator==4.4.1
 diff-match-patch==20181111
 docutils==0.16
